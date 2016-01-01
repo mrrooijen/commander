@@ -1,5 +1,7 @@
 ## Commander
 
+[![Build Status](https://travis-ci.org/meskyanichi/commander.svg)](https://travis-ci.org/meskyanichi/commander)
+
 Command-line interface builder for the [Crystal] programming language. 
 
 
