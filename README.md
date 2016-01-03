@@ -13,6 +13,7 @@ Add this to your application's `shard.yml`:
 dependencies:
   commander:
     github: meskyanichi/commander
+    version: ~> 0.1.0
 ```
 
 
