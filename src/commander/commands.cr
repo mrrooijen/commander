@@ -1,7 +1,7 @@
 class Commander::Commands
   include Enumerable(Command)
 
-  getter commands :: Array(Command)
+  getter commands : Array(Command)
 
   def initialize
     @commands = [] of Command

@@ -1,9 +1,9 @@
 module Commander::Parser::Base
-  getter param :: String
-  getter next_param :: String | Nil
-  getter skip_next :: Proc
-  getter flags :: Flags
-  getter options :: Options
+  getter param : String
+  getter next_param : String | Nil
+  getter skip_next : Proc
+  getter flags : Flags
+  getter options : Options
 
   def initialize(@param, @next_param, @skip_next, @flags, @options)
   end

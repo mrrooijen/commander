@@ -6,18 +6,18 @@ class Commander::Flag
   SHORT_PATTERN = /^\-[a-zA-Z0-9]$/
   LONG_PATTERN  = /^\-\-[a-zA-Z0-9-]+$/
 
-  property name :: String
-  property short :: String
-  property long :: String
-  property default :: Types
-  property description :: String
+  property name : String
+  property short : String
+  property long : String
+  property default : Types
+  property description : String
 
   def initialize
     @name = ""
     @short = ""
     @long = ""
     @description = ""
-    @default :: Types
+    @default = uninitialized Types
   end
 
   def initialize

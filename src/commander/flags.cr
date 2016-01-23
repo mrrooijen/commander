@@ -1,7 +1,7 @@
 class Commander::Flags
   include Enumerable(Flag)
 
-  getter flags :: Array(Flag)
+  getter flags : Array(Flag)
 
   def initialize
     @flags = [] of Flag
