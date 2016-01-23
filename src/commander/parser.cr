@@ -3,12 +3,12 @@ class Commander::Parser
 
   FORMATS = [LongFlagFormat, ShortFlagFormat]
 
-  getter params :: Params
-  getter flags :: Flags
+  getter params : Params
+  getter flags : Flags
 
-  getter options :: Options
-  getter arguments :: Arguments
-  getter skip :: Array(Int32)
+  getter options : Options
+  getter arguments : Arguments
+  getter skip : Array(Int32)
 
   protected def initialize(@params : Params, @flags : Flags)
     @options = Options.new

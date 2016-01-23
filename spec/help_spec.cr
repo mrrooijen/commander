@@ -49,21 +49,21 @@ describe Commander do
     end
 
     cli.help.should eq <<-EOS
-my_program - my program's (long) description.
+      my_program - my program's (long) description.
 
-Usage:
-  my_program [command] [flags] [arguments]
+      Usage:
+        my_program [command] [flags] [arguments]
 
-Commands:
-  help [command]  # Help about any command.
-  kill <pid>      # Kills server by pid.
+      Commands:
+        help [command]  # Help about any command.
+        kill <pid>      # Kills server by pid.
 
-Flags:
-  -e, --env      # The environment to run in. default: 'development'.
-  -h, --help     # Help for this command. default: 'false'.
-  -p, --port     # The port to bind to. default: '8080'.
-  -t, --timeout  # The wait time before dropping the connection. default: '29.5'.
-  -v, --verbose  # Enable more verbose logging. default: 'false'.
+      Flags:
+        -e, --env      # The environment to run in. default: 'development'.
+        -h, --help     # Help for this command. default: 'false'.
+        -p, --port     # The port to bind to. default: '8080'.
+        -t, --timeout  # The wait time before dropping the connection. default: '29.5'.
+        -v, --verbose  # Enable more verbose logging. default: 'false'.
     EOS
   end
 end

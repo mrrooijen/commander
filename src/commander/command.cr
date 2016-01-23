@@ -1,11 +1,11 @@
 class Commander::Command
-  property use :: String
-  property short :: String
-  property long :: String
-  property runner :: Runner
+  property use : String
+  property short : String
+  property long : String
+  property runner : Runner
 
-  getter commands :: Commands
-  getter flags :: Flags
+  getter commands : Commands
+  getter flags : Flags
 
   def initialize(@help = false)
     @use = ""
@@ -36,17 +36,17 @@ class Commander::Command
 
   def help
     <<-EOS
-#{description}
+      #{description}
 
-Usage:
-  #{usage}
+      Usage:
+        #{usage}
 
-Commands:
-  #{command_list}
+      Commands:
+        #{command_list}
 
-Flags:
-  #{flag_list}
-EOS
+      Flags:
+        #{flag_list}
+    EOS
   end
 
   def invoke(params : Params, command = self : Command)
@@ -161,7 +161,7 @@ EOS
   end
 
   private def align(pair, delimeter = " #")
-    max_size = pair.inject(0) do |max, entry|
+    max_size = pair.reduce(0) do |max, entry|
       size = entry[0].size
       size > max ? size : max
     end
@@ -171,6 +171,6 @@ EOS
       "#{entry[0]}#{" " * padding} #{delimeter} #{entry[1]}"
     end
 
-    entries.join("\n  ")
+    entries.join("\n    ")
   end
 end
