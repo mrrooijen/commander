@@ -1,6 +1,6 @@
-class Commander::Parser::LongFlagFormat
-  include Base
+require "./base"
 
+class Commander::Parser::LongFlagFormat < Commander::Parser::Base
   PATTERN        = /^\-\-[a-zA-Z0-9-]{1,}=?/
   EQUALS_PATTERN = /^\-\-[a-zA-Z0-9-]{1,}=/
 

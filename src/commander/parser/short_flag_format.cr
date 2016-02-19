@@ -1,6 +1,6 @@
-class Commander::Parser::ShortFlagFormat
-  include Base
+require "./base"
 
+class Commander::Parser::ShortFlagFormat < Commander::Parser::Base
   PATTERN = /^\-[a-zA-Z0-9]{1,}/
 
   protected def match?

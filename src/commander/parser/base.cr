@@ -1,7 +1,7 @@
-module Commander::Parser::Base
+abstract class Commander::Parser::Base
   getter param : String
   getter next_param : String | Nil
-  getter skip_next : Proc
+  getter skip_next : Proc(Array(Int32))
   getter flags : Flags
   getter options : Options
 
