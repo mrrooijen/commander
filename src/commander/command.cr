@@ -2,7 +2,7 @@ class Commander::Command
   property use : String
   property short : String
   property long : String
-  property runner : Runner
+  property runner : Runner | OptionalRunner | NoReturnRunner | ArrayStringRunner
 
   getter commands : Commands
   getter flags : Flags

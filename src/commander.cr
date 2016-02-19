@@ -5,6 +5,9 @@ module Commander
   alias Params = Array(String)
   alias Arguments = Array(String)
   alias Runner = Proc(Options, Arguments, Void)
+  alias OptionalRunner = Proc(Options, Arguments, Nil)
+  alias NoReturnRunner = Proc(Options, Arguments, NoReturn)
+  alias ArrayStringRunner = Proc(Options, Arguments, Array(String))
 
   def self.run(command : Command, params : Params)
     command.invoke(params)
