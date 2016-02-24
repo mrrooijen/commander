@@ -11,7 +11,15 @@ class Commander::Flags
     flags.each { |flag| yield flag }
   end
 
-  def add(flag)
+  def add(*flags)
+    add flags.to_a
+  end
+
+  def add(flags : Array(Commander::Flag))
+    flags.each { |flag| add(flag) }
+  end
+
+  def add(flag : Commander::Flag)
     flag.validate!
     flags << flag
   end
