@@ -49,7 +49,7 @@ class Commander::Command
     EOS
   end
 
-  def invoke(params : Params, command = self : Command)
+  def invoke(params : Params, command : Command = self)
     if param = params.shift?
       if sub_command = find_command(param)
         sub_command.invoke(params, sub_command)
