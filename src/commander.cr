@@ -1,7 +1,7 @@
 require "./commander/*"
 
 module Commander
-  alias Types = String | Int32 | Int64 | Float32 | Float64 | Bool
+  alias Types = String | Int32 | Int64 | Float32 | Float64 | Bool | Nil
   alias Params = Array(String)
   alias Arguments = Array(String)
   alias Runner = Proc(Options, Arguments, Void)

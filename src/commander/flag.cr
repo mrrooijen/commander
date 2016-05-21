@@ -17,7 +17,7 @@ class Commander::Flag
     @short = ""
     @long = ""
     @description = ""
-    @default = uninitialized Types
+    @default = nil
   end
 
   def initialize
