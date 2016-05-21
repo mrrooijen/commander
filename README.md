@@ -1,6 +1,6 @@
 ## Commander
 
-[![Build Status](https://travis-ci.org/meskyanichi/commander.svg)](https://travis-ci.org/meskyanichi/commander)
+[![Build Status](https://travis-ci.org/mrrooijen/commander.svg)](https://travis-ci.org/mrrooijen/commander)
 
 Command-line interface builder for the [Crystal] programming language. 
 
@@ -12,7 +12,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   commander:
-    github: meskyanichi/commander
+    github: mrrooijen/commander
     version: ~> 0.3.2
 ```
 
@@ -142,7 +142,7 @@ end
 
 #### Contributing
 
-1. Fork it ( https://github.com/meskyanichi/commander/fork )
+1. Fork it ( https://github.com/mrrooijen/commander/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
