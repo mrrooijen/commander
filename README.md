@@ -13,7 +13,7 @@ Add this to your application's `shard.yml`:
 dependencies:
   commander:
     github: mrrooijen/commander
-    version: ~> 0.3.2
+    version: ~> 0.3.3
 ```
 
 
