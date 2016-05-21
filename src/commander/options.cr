@@ -1,4 +1,4 @@
-class Options
+class Commander::Options
   getter string, int, float, bool, null
 
   def initialize
