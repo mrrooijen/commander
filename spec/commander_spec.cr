@@ -620,4 +620,52 @@ describe Commander do
       end
     end
   end
+
+  describe "subcommand" do
+    it "should run when parent command is given a flag" do
+      command = Commander::Command.new do |cmd|
+        cmd.flags.add do |flag|
+          flag.name = "a"
+          flag.short = "-a"
+          flag.default = false
+          flag.description = "example description"
+        end
+
+        cmd.run do |options, arguments|
+          raise BlockRanException.new
+        end
+
+        cmd.commands.add do |cmd|
+          cmd.use = "subcommand"
+
+          cmd.flags.add do |flag|
+            flag.name = "b"
+            flag.short = "-b"
+            flag.default = "b-string"
+            flag.description = "example description"
+          end
+
+          cmd.run do |options, arguments|
+
+            options.bool["a"].should eq true
+            options.string["b"].should eq "value-one"
+
+            parsed_args = ["arg1"]
+            arguments.should eq parsed_args
+
+            raise SubBlockRanException.new
+          end
+        end
+      end
+
+      expect_raises(SubBlockRanException) do
+        command.invoke([
+          "-a",
+          "subcommand",
+          "-b", "value-one",
+          "arg1"
+        ])
+      end
+    end
+  end
 end
