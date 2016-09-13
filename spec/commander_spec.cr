@@ -3,6 +3,9 @@ require "./spec_helper"
 class BlockRanException < Exception
 end
 
+class SubBlockRanException < Exception
+end
+
 describe Commander do
   describe "flag" do
     describe "generic" do
@@ -346,7 +349,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.int["example"].should eq 0 as Int32
+            options.int["example"].should eq 0
             raise BlockRanException.new
           end
         end
@@ -366,7 +369,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.int["example"].should eq 9 as Int32
+            options.int["example"].should eq 9
             raise BlockRanException.new
           end
         end
@@ -386,7 +389,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.int["example"].should eq 9 as Int32
+            options.int["example"].should eq 9
             raise BlockRanException.new
           end
         end
@@ -406,7 +409,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.int["example"].should eq 9 as Int32
+            options.int["example"].should eq 9
             raise BlockRanException.new
           end
         end
@@ -472,7 +475,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.float["example"].should eq 1.1 as Float64
+            options.float["example"].should eq 1.1
             raise BlockRanException.new
           end
         end
@@ -492,7 +495,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.float["example"].should eq 1.9 as Float64
+            options.float["example"].should eq 1.9
             raise BlockRanException.new
           end
         end
@@ -512,7 +515,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.float["example"].should eq 1.9 as Float64
+            options.float["example"].should eq 1.9
             raise BlockRanException.new
           end
         end
@@ -532,7 +535,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.float["example"].should eq 1.9 as Float64
+            options.float["example"].should eq 1.9
             raise BlockRanException.new
           end
         end
@@ -552,7 +555,7 @@ describe Commander do
           end
 
           cmd.run do |options, _|
-            options.float["example"].should eq 19.0 as Float64
+            options.float["example"].should eq 19.0
             raise BlockRanException.new
           end
         end
