@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mrrooijen/commander.svg)](https://travis-ci.org/mrrooijen/commander)
 
-Command-line interface builder for the [Crystal] programming language. 
+Command-line interface builder for the [Crystal] programming language.
 
 
 #### Installation
@@ -66,6 +66,7 @@ cli = Commander::Command.new do |cmd|
     options.float["timeout"] # => 29.5
     options.bool["verbose"]  # => false
     arguments                # => Array(String)
+    puts cmd.help            # => Render help screen
   end
 
   cmd.commands.add do |cmd|
