@@ -141,6 +141,11 @@ end
 - Provide `Commander.run(cli, ARGV)` to handle end-user input exceptions.
 
 
+#### Testing
+
+Refer to [this answer](https://github.com/mrrooijen/commander/issues/13#issuecomment-320645899).
+
+
 #### Contributing
 
 1. Fork it ( https://github.com/mrrooijen/commander/fork )
