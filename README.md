@@ -141,7 +141,7 @@ end
 - Provide `Commander.run(cli, ARGV)` to handle end-user input exceptions.
 
 
-#### Testing
+#### File Structure and Testing
 
 Refer to [this answer](https://github.com/mrrooijen/commander/issues/13#issuecomment-320645899).
 
