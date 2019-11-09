@@ -49,16 +49,7 @@ class Commander::Command
     EOS
   end
 
-  def invoke(params : Params, command : Command = self)
-    if param = params.shift?
-      if sub_command = find_command(param)
-        sub_command.invoke(params, sub_command)
-        return
-      end
-
-      params.unshift(param)
-    end
-
+  def invoke(params : Params, command : Command = self, extra_options = Options.new)
     parser = Parser.new(params, flags)
     options, arguments = parser.parse
 
@@ -67,7 +58,16 @@ class Commander::Command
       exit 0
     end
 
-    command.runner.call(options, arguments)
+    if argument = arguments.shift?
+      if sub_command = find_command(argument)
+        sub_command.invoke(arguments, sub_command, options.globals + extra_options)
+        return
+      end
+
+      arguments.unshift(argument)
+    end
+
+    command.runner.call(options + extra_options, arguments)
   end
 
   protected def name

@@ -32,21 +32,22 @@ class Commander::Parser::LongFlagFormat < Commander::Parser::Base
         doesnt_take_arguments!(flag.long)
       end
 
-      options.set(flag.name, flag.cast(value))
+      option = Option.build(flag.cast(value), flag)
+      options.set(option.key, option)
       return true
     end
-
-    no_such_flag!(key)
   end
 
   private def without_equals
     if flag = flags.find_long(param)
       if flag.type == Bool
-        options.set(flag.name, !flag.default)
+        option = Option.build(!flag.default, flag)
+        options.set(option.key, option)
         return true
       else
         if value = next_param
-          options.set(flag.name, flag.cast(value))
+          option = Option.build(flag.cast(value), flag)
+          options.set(option.key, option)
           skip_next.call
           return true
         else
@@ -55,6 +56,6 @@ class Commander::Parser::LongFlagFormat < Commander::Parser::Base
       end
     end
 
-    no_such_flag!(param)
+    false
   end
 end

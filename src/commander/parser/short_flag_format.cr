@@ -23,11 +23,13 @@ class Commander::Parser::ShortFlagFormat < Commander::Parser::Base
       flag_char = "-#{char}"
       if flag = flags.find_short(flag_char)
         if flag.type == Bool
-          options.set(flag.name, !flag.default)
+          option = Option.build(!flag.default, flag)
+          options.set(option.key, option)
           next
         else
           if value = next_param
-            options.set(flag.name, flag.cast(value))
+            option = Option.build(flag.cast(value), flag)
+            options.set(option.key, option)
             skip_next.call
             next
           else
@@ -36,7 +38,7 @@ class Commander::Parser::ShortFlagFormat < Commander::Parser::Base
         end
       end
 
-      no_such_flag!(flag_char)
+      return false
     end
 
     true

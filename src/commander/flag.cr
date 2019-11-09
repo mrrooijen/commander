@@ -11,6 +11,7 @@ class Commander::Flag
   property long : String
   property default : Types
   property description : String
+  property global : Bool
 
   def initialize
     @name = ""
@@ -18,6 +19,7 @@ class Commander::Flag
     @long = ""
     @description = ""
     @default = nil
+    @global = false
   end
 
   def initialize

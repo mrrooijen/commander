@@ -564,6 +564,58 @@ describe Commander do
     end
   end
 
+  describe "global flag" do
+    it "passes flag to nested command" do
+      command = Commander::Command.new do |cmd|
+        cmd.flags.add do |flag|
+          flag.name = "example"
+          flag.short = "-e"
+          flag.default = ""
+          flag.description = "example description"
+          flag.global = true
+        end
+
+        cmd.commands.add do |cmd|
+          cmd.use = "execute"
+          cmd.short = "Execute a job"
+          cmd.long = cmd.short
+
+          cmd.flags.add do |flag|
+            flag.name = "job"
+            flag.short = "-j"
+            flag.default = 0
+            flag.description = "job id"
+          end
+
+          cmd.run do |options, arguments|
+            options.string["example"].should eq "crystal"
+            options.int["job"].should eq 1
+            raise BlockRanException.new
+          end
+
+          cmd.commands.add do |cmd|
+            cmd.use = "job"
+            cmd.short = "Execute a job"
+            cmd.long = cmd.short
+
+            cmd.run do |options|
+              options.string["example"].should eq "crystal"
+              raise BlockRanException.new
+            end
+          end
+        end
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["-e", "crystal", "execute", "-j", "1"])
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["-e", "crystal", "execute", "job"])
+      end
+    end
+  end
+
   describe "argument" do
     it "should extract arguments" do
       command = Commander::Command.new do |cmd|

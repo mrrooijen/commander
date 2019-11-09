@@ -34,6 +34,7 @@ cli = Commander::Command.new do |cmd|
     flag.long = "--env"
     flag.default = "development"
     flag.description = "The environment to run in."
+    flag.global = true
   end
 
   cmd.flags.add do |flag|
@@ -74,6 +75,8 @@ cli = Commander::Command.new do |cmd|
     cmd.short = "Kills server by pid."
     cmd.long = cmd.short
     cmd.run do |options, arguments|
+      options.int["pid"]    # => Int
+      options.string["env"] # => "development"
       arguments # => ["62719"]
     end
   end
@@ -134,6 +137,7 @@ end
   - Define defaults for each flag
   - Automatically validates, parses and casts to the correct type
   - Automatically passes all parsed `options` to `cmd.run`
+- Define global flags to pass to sub-commands
 - Receive additional cli arguments per command (`arguments` in `cmd.run`)
 - Automatically generates a help page for each command
   - Generates a `help` command for each command to access the help page

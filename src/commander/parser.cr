@@ -22,7 +22,10 @@ class Commander::Parser
   end
 
   private def set_defaults!
-    flags.each { |flag| options.set(flag.name, flag.default) }
+    flags.each do |flag|
+      option = Option.build(flag.default, flag)
+      options.set(option.key, option)
+    end
   end
 
   private def build
