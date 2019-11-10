@@ -7,13 +7,12 @@ class Commander::Command
   getter commands : Commands
   getter flags : Flags
 
-  def initialize(@help = false)
+  def initialize(@help = false, @flags = Flags.new)
     @use = ""
     @short = ""
     @long = ""
     @runner = Runner.new { |arguments, options| }
-    @commands = Commands.new
-    @flags = Flags.new
+    @commands = Commands.new(@flags)
 
     unless help?
       flags.add(build_help_flag)
@@ -21,8 +20,8 @@ class Commander::Command
     end
   end
 
-  def initialize(help = false)
-    initialize(help)
+  def initialize(help = false, flags = Flags.new)
+    initialize(help, flags)
     yield self
   end
 

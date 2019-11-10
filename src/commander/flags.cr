@@ -3,8 +3,7 @@ class Commander::Flags
 
   getter flags : Array(Flag)
 
-  def initialize
-    @flags = [] of Flag
+  def initialize(@flags = Array(Flag).new)
   end
 
   def each

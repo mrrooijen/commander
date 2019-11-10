@@ -564,6 +564,102 @@ describe Commander do
     end
   end
 
+  describe "persistent flags" do
+    it "should persist to child commands" do
+      command = Commander::Command.new do |cmd|
+        cmd.flags.add do |flag|
+          flag.name = "a"
+          flag.short = "-a"
+          flag.default = false
+          flag.description = "example description"
+        end
+
+        cmd.flags.add do |flag|
+          flag.name = "b"
+          flag.short = "-b"
+          flag.default = false
+          flag.description = "example description"
+          flag.persistent = true
+        end
+
+        cmd.run do |options, arguments|
+          arguments.should be_empty
+          options.bool["a"]?.should be_true
+          options.bool["b"]?.should be_true
+          raise BlockRanException.new
+        end
+
+        cmd.commands.add do |cmd|
+          cmd.use = "a1"
+
+          cmd.flags.add do |flag|
+            flag.name = "c"
+            flag.short = "-c"
+            flag.default = false
+            flag.description = "example description"
+          end
+
+          cmd.flags.add do |flag|
+            flag.name = "d"
+            flag.short = "-d"
+            flag.default = false
+            flag.description = "example description"
+            flag.persistent = true
+          end
+
+          cmd.run do |options, arguments|
+            arguments.should be_empty
+            options.bool["a"]?.should be_nil
+            options.bool["b"]?.should be_true
+            options.bool["c"]?.should be_true
+            options.bool["d"]?.should be_true
+            raise BlockRanException.new
+          end
+
+          cmd.commands.add do |cmd|
+            cmd.use = "a2"
+
+            cmd.run do |options, arguments|
+              arguments.should be_empty
+              options.bool["a"]?.should be_nil
+              options.bool["b"]?.should be_true
+              options.bool["c"]?.should be_nil
+              options.bool["d"]?.should be_true
+              raise BlockRanException.new
+            end
+          end
+        end
+
+        cmd.commands.add do |cmd|
+          cmd.use = "b1"
+
+          cmd.run do |options, arguments|
+            arguments.should be_empty
+            options.bool["a"]?.should be_nil
+            options.bool["b"]?.should be_true
+            raise BlockRanException.new
+          end
+        end
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["-a", "-b"])
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["a1", "-b", "-c", "-d"])
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["a1", "a2", "-b", "-d"])
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["b1", "-b"])
+      end
+    end
+  end
+
   describe "argument" do
     it "should extract arguments" do
       command = Commander::Command.new do |cmd|

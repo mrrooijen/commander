@@ -36,6 +36,7 @@ describe Commander do
         flag.long = "--verbose"
         flag.default = false
         flag.description = "Enable more verbose logging."
+        flag.persistent = true
       end
 
       cmd.commands.add do |cmd|
@@ -63,6 +64,20 @@ describe Commander do
         -h, --help     # Help for this command. default: 'false'.
         -p, --port     # The port to bind to. default: '8080'.
         -t, --timeout  # The wait time before dropping the connection. default: '29.5'.
+        -v, --verbose  # Enable more verbose logging. default: 'false'.
+    EOS
+
+    cli.commands.to_a[1].help.should eq <<-EOS
+      kill - Kills server by pid.
+
+      Usage:
+        kill <pid> [flags] [arguments]
+
+      Commands:
+        help [command]  # Help about any command.
+
+      Flags:
+        -h, --help     # Help for this command. default: 'false'.
         -v, --verbose  # Enable more verbose logging. default: 'false'.
     EOS
   end

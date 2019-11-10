@@ -3,7 +3,7 @@ class Commander::Commands
 
   getter commands : Array(Command)
 
-  def initialize
+  def initialize(@flags : Flags)
     @commands = [] of Command
   end
 
@@ -12,7 +12,8 @@ class Commander::Commands
   end
 
   def add
-    yield(command = Command.new)
+    flags = Flags.new(@flags.select(&.persistent))
+    yield command = Command.new(false, flags)
     add(command)
   end
 

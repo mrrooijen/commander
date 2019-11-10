@@ -58,6 +58,7 @@ cli = Commander::Command.new do |cmd|
     flag.long = "--verbose"
     flag.default = false
     flag.description = "Enable more verbose logging."
+    flag.persistent = true
   end
 
   cmd.run do |options, arguments|
@@ -130,8 +131,10 @@ end
   - Multi-short flags (`-fp 8080`, equivalent to `-f -p 8080`)
   - Long argument flags (`--port 8080`, `--port=8080`)
   - Long boolean flags (`--force`)
-  - Reuse flags for multiple commands (`verbose = Commander::Flag.new`)
-  - Define defaults for each flag
+  - Share flags with multiple commands (`verbose = Commander::Flag.new`)
+  - Persistent flags for recursively inheriting flags from a parent command (`flag.persistent = true`)
+  - Global flags by defining persistent flags on the root command (`flag.persistent = true`)
+  - Default values for each flag
   - Automatically validates, parses and casts to the correct type
   - Automatically passes all parsed `options` to `cmd.run`
 - Receive additional cli arguments per command (`arguments` in `cmd.run`)
