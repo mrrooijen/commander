@@ -157,7 +157,15 @@ class Commander::Command
         result += "    #{flag.long}"
       end
 
-      description = "#{flag.description} default: '#{flag.default}'."
+      description =
+        case flag.default
+        when Bool, ""
+          flag.description
+        when Number
+          "#{flag.description} default: #{flag.default}"
+        else
+          "#{flag.description} default: '#{flag.default}'"
+        end
 
       {result, description}
     end

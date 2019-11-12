@@ -7,6 +7,14 @@ describe Commander do
       cmd.long = "my program's (long) description."
 
       cmd.flags.add do |flag|
+        flag.name = "suffix"
+        flag.short = "-s"
+        flag.long = "--suffix"
+        flag.default = ""
+        flag.description = "Suffix of something."
+      end
+
+      cmd.flags.add do |flag|
         flag.name = "env"
         flag.short = "-e"
         flag.long = "--env"
@@ -60,11 +68,12 @@ describe Commander do
         kill <pid>      Kills server by pid.
 
       Flags:
-        -e, --env      The environment to run in. default: 'development'.
-        -h, --help     Help for this command. default: 'false'.
-        -p, --port     The port to bind to. default: '8080'.
-        -t, --timeout  The wait time before dropping the connection. default: '29.5'.
-        -v, --verbose  Enable more verbose logging. default: 'false'.
+        -e, --env      The environment to run in. default: 'development'
+        -h, --help     Help for this command.
+        -p, --port     The port to bind to. default: 8080
+        -s, --suffix   Suffix of something.
+        -t, --timeout  The wait time before dropping the connection. default: 29.5
+        -v, --verbose  Enable more verbose logging.
     EOS
 
     cli.commands.to_a[1].help.should eq <<-EOS
@@ -77,8 +86,8 @@ describe Commander do
         help [command]  Help about any command.
 
       Flags:
-        -h, --help     Help for this command. default: 'false'.
-        -v, --verbose  Enable more verbose logging. default: 'false'.
+        -h, --help     Help for this command.
+        -v, --verbose  Enable more verbose logging.
     EOS
   end
 end
