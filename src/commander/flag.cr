@@ -7,9 +7,9 @@ class Commander::Flag
   LONG_PATTERN  = /^\-\-[a-zA-Z0-9-]+$/
 
   property name : String
-  property short : String
-  property long : String
   property default : Types
+  setter short : String
+  setter long : String
   property description : String
   property persistent : Bool
 
@@ -17,6 +17,7 @@ class Commander::Flag
     @name = ""
     @short = ""
     @long = ""
+    @arg = ""
     @description = ""
     @default = nil
     @persistent = false
@@ -25,6 +26,27 @@ class Commander::Flag
   def initialize
     initialize
     yield self
+  end
+
+  def short : String
+    @short.split[0]? || ""
+  end
+
+  def long : String
+    @long.split[0]? || ""
+  end
+
+  def arg : String | Nil
+    long_segments = @long.split[1..-1]? || Array(String).new
+    short_segments = @short.split[1..-1]? || Array(String).new
+
+    if long_segments.size > 0
+      long_segments.join(" ")
+    elsif short_segments.size > 0
+      short_segments.join(" ")
+    else
+      nil
+    end
   end
 
   protected def type

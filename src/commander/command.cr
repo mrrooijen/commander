@@ -157,6 +157,8 @@ class Commander::Command
         result += "    #{flag.long}"
       end
 
+      result += " #{flag.arg}" if flag.arg
+
       description =
         case flag.default
         when Bool, ""
