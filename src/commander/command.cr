@@ -165,7 +165,7 @@ class Commander::Command
     align(pairs)
   end
 
-  private def align(pair, delimeter = " #")
+  private def align(pair)
     max_size = pair.reduce(0) do |max, entry|
       size = entry[0].size
       size > max ? size : max
@@ -173,7 +173,7 @@ class Commander::Command
 
     entries = pair.map do |entry|
       padding = max_size - entry[0].size
-      "#{entry[0]}#{" " * padding} #{delimeter} #{entry[1]}"
+      "#{entry[0]}#{" " * padding}  #{entry[1]}"
     end
 
     entries.join("\n    ")

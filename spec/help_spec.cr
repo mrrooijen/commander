@@ -56,15 +56,15 @@ describe Commander do
         my_program [command] [flags] [arguments]
 
       Commands:
-        help [command]  # Help about any command.
-        kill <pid>      # Kills server by pid.
+        help [command]  Help about any command.
+        kill <pid>      Kills server by pid.
 
       Flags:
-        -e, --env      # The environment to run in. default: 'development'.
-        -h, --help     # Help for this command. default: 'false'.
-        -p, --port     # The port to bind to. default: '8080'.
-        -t, --timeout  # The wait time before dropping the connection. default: '29.5'.
-        -v, --verbose  # Enable more verbose logging. default: 'false'.
+        -e, --env      The environment to run in. default: 'development'.
+        -h, --help     Help for this command. default: 'false'.
+        -p, --port     The port to bind to. default: '8080'.
+        -t, --timeout  The wait time before dropping the connection. default: '29.5'.
+        -v, --verbose  Enable more verbose logging. default: 'false'.
     EOS
 
     cli.commands.to_a[1].help.should eq <<-EOS
@@ -74,11 +74,11 @@ describe Commander do
         kill <pid> [flags] [arguments]
 
       Commands:
-        help [command]  # Help about any command.
+        help [command]  Help about any command.
 
       Flags:
-        -h, --help     # Help for this command. default: 'false'.
-        -v, --verbose  # Enable more verbose logging. default: 'false'.
+        -h, --help     Help for this command. default: 'false'.
+        -v, --verbose  Enable more verbose logging. default: 'false'.
     EOS
   end
 end
