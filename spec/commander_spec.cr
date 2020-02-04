@@ -660,6 +660,30 @@ describe Commander do
     end
   end
 
+  describe "passthrough params" do
+    it "passes through any flags or arguments after -- " do
+      command = Commander::Command.new do |cmd|
+        cmd.flags.add do |flag|
+          flag.name = "example"
+          flag.short = "-e"
+          flag.long = "--example"
+          flag.default = "hello"
+          flag.description = "example description"
+        end
+
+        cmd.run do |options, arguments|
+          options.string["example"].should eq "world"
+          arguments.should eq ["--ignored-option", "some-value"]
+          raise BlockRanException.new
+        end
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["--example", "world", "--", "--ignored-option", "some-value"])
+      end
+    end
+  end
+
   describe "argument" do
     it "should extract arguments" do
       command = Commander::Command.new do |cmd|

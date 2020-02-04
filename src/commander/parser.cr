@@ -29,6 +29,12 @@ class Commander::Parser
     params.each_with_index do |param, index|
       next if skip.includes?(index)
 
+      if param == "--"
+        rest_params = params[(index + 1)...(params.size)]
+        arguments.concat(rest_params)
+        break
+      end
+
       is_argument = true
       next_param = params[index + 1]?
       skip_next = ->{ skip << index + 1 }
