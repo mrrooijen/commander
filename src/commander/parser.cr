@@ -9,8 +9,9 @@ class Commander::Parser
   getter options : Options
   getter arguments : Arguments
   getter skip : Array(Int32)
+  getter? ignore_unmapped_flags : Bool
 
-  protected def initialize(@params : Params, @flags : Flags)
+  protected def initialize(@params : Params, @flags : Flags, @ignore_unmapped_flags = false)
     @options = Options.new
     @arguments = Arguments.new
     @skip = Array(Int32).new
@@ -46,6 +47,7 @@ class Commander::Parser
           skip_next,
           flags,
           options,
+          ignore_unmapped_flags: ignore_unmapped_flags?,
         )
 
         if fmt.match? && fmt.parse!

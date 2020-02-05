@@ -4,11 +4,13 @@ abstract class Commander::Parser::Base
   getter skip_next : Proc(Array(Int32))
   getter flags : Flags
   getter options : Options
+  getter? ignore_unmapped_flags : Bool
 
-  def initialize(@param, @next_param, @skip_next, @flags, @options)
+  def initialize(@param, @next_param, @skip_next, @flags, @options, @ignore_unmapped_flags = false)
   end
 
   private def no_such_flag!(flag)
+    return if ignore_unmapped_flags?
     raise Exception.new("Flag '#{flag}' does not exist")
   end
 

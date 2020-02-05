@@ -3,6 +3,7 @@ class Commander::Command
   property short : String
   property long : String
   property runner : Runner | OptionalRunner | NoReturnRunner | ArrayStringRunner
+  property? ignore_unmapped_flags : Bool
 
   getter commands : Commands
   getter flags : Flags
@@ -12,6 +13,7 @@ class Commander::Command
     @short = ""
     @long = ""
     @runner = Runner.new { |arguments, options| }
+    @ignore_unmapped_flags = false
     @commands = Commands.new(@flags)
 
     unless help?
@@ -58,7 +60,11 @@ class Commander::Command
       params.unshift(param)
     end
 
-    parser = Parser.new(params, flags)
+    parser = Parser.new(
+      params,
+      flags,
+      ignore_unmapped_flags: ignore_unmapped_flags?
+    )
     options, arguments = parser.parse
 
     if options.bool.delete("help")

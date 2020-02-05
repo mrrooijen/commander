@@ -44,6 +44,36 @@ describe Commander do
         end
       end
 
+      it "does not raise an exception if short flag doesn't exist and ignore_unmapped_flags is set" do
+        command = Commander::Command.new do |cmd|
+          cmd.ignore_unmapped_flags = true
+
+          cmd.run do |options, arguments|
+            arguments.should eq ["-f", "file.txt"]
+            raise BlockRanException.new
+          end
+        end
+
+        expect_raises(BlockRanException) do
+          command.invoke(["-f", "file.txt"])
+        end
+      end
+
+      it "does not raise an exception if long flag doesn't exist and ignore_unmapped_flags is set" do
+        command = Commander::Command.new do |cmd|
+          cmd.ignore_unmapped_flags = true
+
+          cmd.run do |options, arguments|
+            arguments.should eq ["--file", "file.txt"]
+            raise BlockRanException.new
+          end
+        end
+
+        expect_raises(BlockRanException) do
+          command.invoke(["--file", "file.txt"])
+        end
+      end
+
       it "raises an exception if long flag format is invalid" do
         message = "Long flag '-example-flag' is invalid. " +
           "Long flags must start with a '--', followed by a " +
