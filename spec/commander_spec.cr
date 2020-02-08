@@ -44,6 +44,36 @@ describe Commander do
         end
       end
 
+      it "does not raise an exception if short flag doesn't exist and ignore_unmapped_flags is set" do
+        command = Commander::Command.new do |cmd|
+          cmd.ignore_unmapped_flags = true
+
+          cmd.run do |options, arguments|
+            arguments.should eq ["-f", "file.txt"]
+            raise BlockRanException.new
+          end
+        end
+
+        expect_raises(BlockRanException) do
+          command.invoke(["-f", "file.txt"])
+        end
+      end
+
+      it "does not raise an exception if long flag doesn't exist and ignore_unmapped_flags is set" do
+        command = Commander::Command.new do |cmd|
+          cmd.ignore_unmapped_flags = true
+
+          cmd.run do |options, arguments|
+            arguments.should eq ["--file", "file.txt"]
+            raise BlockRanException.new
+          end
+        end
+
+        expect_raises(BlockRanException) do
+          command.invoke(["--file", "file.txt"])
+        end
+      end
+
       it "raises an exception if long flag format is invalid" do
         message = "Long flag '-example-flag' is invalid. " +
           "Long flags must start with a '--', followed by a " +
@@ -656,6 +686,30 @@ describe Commander do
 
       expect_raises(BlockRanException) do
         command.invoke(["b1", "-b"])
+      end
+    end
+  end
+
+  describe "passthrough params" do
+    it "passes through any flags or arguments after -- " do
+      command = Commander::Command.new do |cmd|
+        cmd.flags.add do |flag|
+          flag.name = "example"
+          flag.short = "-e"
+          flag.long = "--example"
+          flag.default = "hello"
+          flag.description = "example description"
+        end
+
+        cmd.run do |options, arguments|
+          options.string["example"].should eq "world"
+          arguments.should eq ["--ignored-option", "some-value"]
+          raise BlockRanException.new
+        end
+      end
+
+      expect_raises(BlockRanException) do
+        command.invoke(["--example", "world", "--", "--ignored-option", "some-value"])
       end
     end
   end

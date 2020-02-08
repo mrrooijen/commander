@@ -19,9 +19,13 @@ class Commander::Parser::ShortFlagFormat < Commander::Parser::Base
       end
     end
 
+    found_flag_match = false
+
     chars.each do |char|
       flag_char = "-#{char}"
       if flag = flags.find_short(flag_char)
+        found_flag_match = true
+
         if flag.type == Bool
           options.set(flag.name, !flag.default)
           next
@@ -39,6 +43,6 @@ class Commander::Parser::ShortFlagFormat < Commander::Parser::Base
       no_such_flag!(flag_char)
     end
 
-    true
+    found_flag_match
   end
 end
