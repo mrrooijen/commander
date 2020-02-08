@@ -13,13 +13,15 @@ Add this to your application's `shard.yml`:
 dependencies:
   commander:
     github: mrrooijen/commander
-    version: ~> 0.3.4
+    version: ~> 0.3.5
 ```
 
 
 #### Usage
 
-Practically everything you need to know in one example:
+Almost everything you need to know in one example.
+
+Refer to the [Features](#features) section below for a list of all available features.
 
 ```crystal
 require "commander"
@@ -94,21 +96,21 @@ Usage:
   my_program [command] [flags] [arguments]
 
 Commands:
-  help [command]  # Help about any command.
-  kill <pid>      # Kills server by pid.
+  help [command]  Help about any command.
+  kill <pid>      Kills server by pid.
 
 Flags:
-  -e, --env      # The environment to run in. default: 'development'.
-  -h, --help     # Help for this command. default: 'false'.
-  -p, --port     # The port to bind to. default: '8080'.
-  -t, --timeout  # The wait time before dropping the connection. default: '29.5'.
-  -v, --verbose  # Enable more verbose logging. default: 'false'.
+  -e, --env      The environment to run in. default: 'development'
+  -h, --help     Help for this command.
+  -p, --port     The port to bind to. default: 8080
+  -t, --timeout  The wait time before dropping the connection. default: 29.5
+  -v, --verbose  Enable more verbose logging.
 ```
 
 This is how you override the default options and pass in additional arguments:
 
 ```
-$ my_program -ve production --port 8443 --timeout=25 arg1 arg2 arg3
+$ my_program -ve production --port 8443 --timeout=25 arg1 arg2 arg3 -- arg4 --arg5
 ```
 
 ```crystal
@@ -124,8 +126,8 @@ end
 
 #### Features
 
-- Define commands recursively.
-- Define flags on a per-command basis.
+- Define commands recursively
+- Define flags on a per-command basis
   - Short argument flags (`-p 8080`)
   - Short boolean flags (`-f`)
   - Multi-short flags (`-fp 8080`, equivalent to `-f -p 8080`)
@@ -136,8 +138,10 @@ end
   - Global flags by defining persistent flags on the root command (`flag.persistent = true`)
   - Default values for each flag
   - Automatically validates, parses and casts to the correct type
-  - Automatically passes all parsed `options` to `cmd.run`
+    - Automatically passes all parsed `options` to `cmd.run`
 - Receive additional cli arguments per command (`arguments` in `cmd.run`)
+- Receive unmapped flags as arguments (`cmd.ignore_unmapped_flags = true`)
+- Receive all input after `--` as arguments
 - Automatically generates a help page for each command
   - Generates a `help` command for each command to access the help page
   - Generates `-h, --help` flags for each command to access to help page
