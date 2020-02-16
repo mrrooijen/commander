@@ -1,6 +1,6 @@
 ## Commander
 
-[![Build Status](https://travis-ci.org/mrrooijen/commander.svg)](https://travis-ci.org/mrrooijen/commander)
+[![Test Status](https://github.com/mrrooijen/commander/workflows/Test/badge.svg)](https://github.com/mrrooijen/commander/actions)
 
 Command-line interface builder for the [Crystal] programming language.
 
