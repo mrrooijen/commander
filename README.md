@@ -27,40 +27,40 @@ Refer to the [Features](#features) section below for a list of all available fea
 require "commander"
 
 cli = Commander::Command.new do |cmd|
-  cmd.use = "my_program"
+  cmd.use  = "my_program"
   cmd.long = "my program's (long) description."
 
   cmd.flags.add do |flag|
-    flag.name = "env"
-    flag.short = "-e"
-    flag.long = "--env"
-    flag.default = "development"
+    flag.name        = "env"
+    flag.short       = "-e"
+    flag.long        = "--env"
+    flag.default     = "development"
     flag.description = "The environment to run in."
   end
 
   cmd.flags.add do |flag|
-    flag.name = "port"
-    flag.short = "-p"
-    flag.long = "--port"
-    flag.default = 8080
+    flag.name        = "port"
+    flag.short       = "-p"
+    flag.long        = "--port"
+    flag.default     = 8080
     flag.description = "The port to bind to."
   end
 
   cmd.flags.add do |flag|
-    flag.name = "timeout"
-    flag.short = "-t"
-    flag.long = "--timeout"
-    flag.default = 29.5
+    flag.name        = "timeout"
+    flag.short       = "-t"
+    flag.long        = "--timeout"
+    flag.default     = 29.5
     flag.description = "The wait time before dropping the connection."
   end
 
   cmd.flags.add do |flag|
-    flag.name = "verbose"
-    flag.short = "-v"
-    flag.long = "--verbose"
-    flag.default = false
+    flag.name        = "verbose"
+    flag.short       = "-v"
+    flag.long        = "--verbose"
+    flag.default     = false
     flag.description = "Enable more verbose logging."
-    flag.persistent = true
+    flag.persistent  = true
   end
 
   cmd.run do |options, arguments|
@@ -73,9 +73,9 @@ cli = Commander::Command.new do |cmd|
   end
 
   cmd.commands.add do |cmd|
-    cmd.use = "kill <pid>"
+    cmd.use   = "kill <pid>"
     cmd.short = "Kills server by pid."
-    cmd.long = cmd.short
+    cmd.long  = cmd.short
     cmd.run do |options, arguments|
       arguments # => ["62719"]
     end
