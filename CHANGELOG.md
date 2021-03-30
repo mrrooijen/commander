@@ -1,3 +1,8 @@
+## v0.4.0
+
+* Support Crystal 1.0
+
+
 ## v0.3.5
 
 * Tweaked help screen display format.
